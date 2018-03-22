@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset='utf-8'>
+        <link rel="stylesheet" type="text/css" href="fieldset.css" />
+    </head>
+    <body>
+        <fieldset>
+            <legend>Your Contact Details</legend>
+            <div>
+                <label for="author">Name:<em class="required">(required)</em></label>
+                <input name="author" id="author" type="text" />
+            </div>
+            <div>
+                <label for="email">Email Address:</label>
+                <input name="email" id="email" type="text" />
+            </div>
+            <div>
+                <label for="url">Web Address:</label>
+                <input name="url" id="url" type="text" />
+            </div>
+            <div>
+                <label for="text">Message:</label>
+                <textarea name="text" id="text"></textarea>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Remember Me</legend>
+            <div>
+                <label for="remember-yes"><input id="remember-yes" class="radio"
+                name="remember" type="radio" value="yes" />Yes</label>
+            </div>
+            <div>
+                <label for="remember-no"><input id="remember-no" class="radio"
+                name="remember" type="radio" value="no" checked="checked"/>No</label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Personmal Information</legend>
+            <div>
+                <label for="Place of Birth">Place of Birth:</label>
+                <select name="placeOfBirth" id="placeOfBirth">
+                        <option value="CN">CHINA</option>
+                        <option value="US">USA</option>
+                        <option value="JP">JAPAN</option>
+                </select>
+            </div>
+            <div>
+                <label for="dateOfBirth">Date of Birth:</label>
+                <input id="dateOfBirth" class="radio" name="dateOfBirth" type="text" />
+                <label id="monthOfBirth" for="monthOfBirth">Month of Birth:</label>
+                <select name="monthOfBirth" id="monthOfBirth">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                </select>
+                <label id="yearOfBirth" for="yearOfBirth">Date of Birth:</label>
+                <input id="yearOfBirth" name="yearOfBirth" type="text" />
+            </div>
+            <fieldset id="favoriteColor">
+                <h2>Favorite Color:</h2>
+                <div class="col">
+                    <label><input class="checkbox" id="red" name="red" type="checkbox" value="red" />red</label>
+                </div>
+                <div class="col">
+                    <label><input class="checkbox" id="orange" name="orange" type="checkbox" value="orange" />orange</label>                    </div>
+                <div class="col">
+                    <label><input class="checkbox" id="green" name="green" type="checkbox" value="green" />green</label>
+                </div>
+                <div class="col">
+                    <label><input class="checkbox" id="blue" name="blue" type="checkbox" value="blue" />blue</label>                    </div>
+                <div class="col">
+                    <label><input class="checkbox" id="white" name="white" type="checkbox" value="white" />white</label>
+                </div>
+                <div class="col">
+                    <label><input class="checkbox" id="black" name="black" type="checkbox" value="black" />black</label>
+                </div>
+            </fieldset>
+            <div>
+                <button type="submit" id="button"> Book Now
+                </button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Your Contact Details</legend>
+            <div>
+                <label for="author">Name:<em class="required">(required)</em></label>
+                <input name="author" id="author" type="text" />
+            </div>
+            <div>
+                <label for="email">Email Address:</label><em class="feedback">Incorrect email address.Please try again.</em>
+                <input name="email" id="email" type="text" />
+            </div>
+            <div>
+                <label for="url">Web Address:</label>
+                <input name="url" id="url" type="text" />
+            </div>
+        </fieldset>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+    <div>
+        <h2> DOM知识总结 </h2>
+        <p id="main"> 一份文档就是一颗节点树 (node tree) </p>
+        <p>节点分为:元素节点 属性节点 文本节点 </p>
+        <p>网页由 结构层:超文本标记语言HTML 样式层:层叠样式表CSS 行为层:文档对象模型DOM 三部分构成.</p>
+        <p>每个节点都是一个对象</p>
+        <p>getElementById将返回一个对象,该对象对应着文档里特定的元素节点</p>
+        <p>getElementByTagName 和 getElementByclassName将返回一个对象数组,他们分别对应着文档中一组特定的元素节点</p> 
+        <p>getAttribute('')获取一个节点的属性</p>
+        <p>setAttribute('')设置一个节点的属性</p>
+        <p>element.setAttribute('src',source)等同于element.src=source. 前者为DOM Core方法,后者为HTML-DOM方法,但要注意,DOM是一种通用型API,严格遵守"第一级DOM"规范能避免那些与兼容性有关的问题</p>
+        <p>window.onload 可以在页面加载时调用函数 </p>
+        <p>在一棵节点树上,node.childNodes可以用来获取任何一个元素的所有子元素,得到一个包含这个元素全部子元素的数组 element.childNodes</p>
+        <p>可以用node.nodeType属性来检测节点的属性值,其中 元素节点的属性值为1,属性节点的属性值为2,文本节点的属性值为3,这就意味可以让函数只对特定的节点进行操作,例如编写一个只处理元素节点的函数.</p>
+        <p>如果想改变一个文本节点的值,可以使用node.nodeValue属性,它可以获取和设置一个节点的值.</p>
+        <p>数组元素childNodes[0]有一个更直观的同义属性,node.firstChild=node.childNodes[0],同理还有与之对应的node.lastChild属性,node.lastChild=node.childNodes[node.childNodes.length-1]</p>
+        <P>一个SEO的优化方法:平稳退化, 比如将html标签中的js函数提取到外部文件,还可以多使用DOM属性避免爬虫机器人无法访问到js代码执行跳过,比如将this.getAttribute("href")改写成this.href</p>
+        <p>CSS最大的优点是:将结构与样式分离 </p>
+        <p>渐进增强:指给用一些额外的信息层去包裹原始文档数据,在此之下的网页几乎符合平稳退化原则</p>
+        <p>向后兼容的方法之一,对象检测: 只需要把方法打包在一个IF语句中,通过判断返回的True还是False来决定采取什么样的行动.其中,"条件:如果你理解这个方法则采用这个方法"改写成"如果你不理解这个方法则离开"的方式更加容易理解</p>
+        <p>在网页的性能优化方面,尽量少访问DOM和尽量减少标记.访问DOM的方式会对脚本性能产生巨大影响,在多个函数取得类似一组元素情况下,应当把第一次搜索结果放在一个都可以访问的变量中,或者以传参数的形式传递给函数</p>
+        <p>结构化程序设计: 函数应该只有一个入口和一个出口,在大多数条件下应当尽量避免函数有多个return,一个函数如果有多个出口,把这些出口集中在函数的开头部分好一些.</p>
+        <p>需要网页加载完毕触发事件,可以使用window.onload,但是注意如果要加载多个事件,多条onload的语句只会运行最后一句,正确的解决方式为,提前创建一个匿名函数使得window.onload正确加载.</p>
+        <p>将纵向列表改成横向显示的方法: 修改列表的display为inline行内模块</p>
+        <p>innerHTML支持写入和读取,但是毫无细节可言,他会获取一个html标签下所有的元素并依次排列出来.一旦使用了innerHTML替换,标签原来的全部内容都将改变,适用于一大段HTML内容需要插入文档中的时候</p>
+        <p>DOM方法插入文档内容,可以先创建一个元素,然后再把元素插入节点树,这里可以使用document.createElement("nodename"),使用到此方法,最好将结果赋予一个变量.此时的新节点称为 文档碎片 暂时还无法显示在浏览器中.</p>
+        <p>将新节点插入节点树最简单的方法是成为现有节点的一个子节点.可以用到parent.appendChild(child)</p>
+        <p>此时元素节点已经插入完毕,得到一个新的空白节点,我们可以使用document.createTextNode("text")方法赋予一个变量创建文本元素.再通过appendChild追加到空白元素节点后面.</p>
+        <p>DOM提供了insertBefore的方法,可以把一个新元素插入到现有元素的前面,如 parentElement.insertBefore(newElement,targetElement)</p>
+        <p>渐进增强:你应该总是从最核心的部分,也就是内容开始,根据内容使用标记实现良好的结构,然后再逐步加强这些内容,可以通过CSS或者JavaScript添加各种行为.做到结构与样式分离</p>
+        <p>平稳退化:如果你按照渐进增强的原则去充实内容,则你添加的样式和行为自然会支持平稳退化.那些缺乏必要的CSS或者JavaScript行为依旧可以访问你的核心内容.所以不要用DOM操作或者JavaScript去添加这些重要内容</p>
+        <p>当你用JavaScript操作CSS属性时,规定使用驼峰命名法,比如font-family就要变成fontFamily,不管有多少个连字符,都要用驼峰命名法来表示它们.</p>
+        <p>请记住,所有Style属性值永远是一个字符串. 如p.style.color = "black"  右边注意一定是字符串形式,属性值必须放到引号里.</p>
+        <p>利用JavaScript来修改css属性值的情况:1.为标签元素统一的声明样式  2.为有特定class属性的元素统一声明样式  3.为独一无二的id属性元素单独声明样式 4.根据某种条件反复设置样式 如表格颜色  </p>
+        <p>只要CSS能实现,最好用CSS来为文档设置样式,CSS提供的:hover等伪class属性允许我们根据HTML元素改变样式.当你难判断是否选择DOM操作还是CSS来设置样式时,请选择最容易实现需求的方法</p>
+        <p>如果想改变元素的呈现效果,请使用CSS 如果想改变元素的行为,请使用DOM操作. 如果想根据行为来改变呈现效果,请选择一个简单的实现形式去做.</p>
+        <p>position的值有四种:static fixed relative absolute. 
+        static是属性的默认值,相对定位relative与static类似,但是可以通过修改浮动float属性从文档显示顺序中脱离出来, 
+        绝对定位absolute可以摆放到一个容器的任何位置,这个容器可以是文档本身window,也可以是拥有fixed和absolute属性的父元素,它的属性只由top left right bottom等决定,
+        而fixed属性的元素,相对于文档窗口window进行固定的定位,属性也由top left right bottom决定.</p>
+        <p>想要创建动画就必须制造出时间间隔,我们可以使用setTimeout("function",interval) 同时我们可以使用clearTimeout()来取消动画</p>
+        <p>函数parseInt()可以把字符串里的数字信息提取出来,比如parseInt("12 days") 此时返回"12"  如果我们要提取带小数点的浮点数 我们可以使用parseFloat()函数</p>
+        <p>CSS中的overflow属性可以处理元素尺寸超过容器尺寸的情况.这种情况下可以对内容进行裁剪,还可以告诉浏览器是否需要滚动条.
+        overflow属性有:visible 不剪裁溢出内容 hidden 隐藏溢出内容 scroll 隐藏内容并添加滚动条 auto类似scroll 溢出时自动判定</p>
+        <p>JavaScript允许我们给元素添加属性element.property = value, 我们可以通过属性来判断元素的运动情况,
+        比如在移动函数中,已经赋予move属性的元素将不会重复获得move属性,当多次获得属性时,会对已经有move属性得元素进行clearTimeout清空操作</p>
+        <p>我们可以通过Math.ceil(number)返回一个浮点数"大于"方向最接近得整数(进一位),可以通过Math.floor(number)返回一个浮点数"小于"方向最接近的整数(退一位),可以用Math.round(number)取整数(四舍五入)</p>
+    </div>
+</body>
+</html>

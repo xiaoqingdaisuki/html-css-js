@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset='utf-8'>
+        <link rel="stylesheet" type="text/css" href="calendar.css" />
+    </head>
+    <body>
+        <div class="box">
+            <h1 style="margin:0 auto;">calendar</h1>
+            <div class="box">
+            <table class="cal" summary="A calendar style date picker">
+                <caption><a href="#" rel="prev">&lt;</a> March 2018 <a href="#" rel="next">&gt;</a></caption>
+                <colgroup>
+                    <col id="sun" />
+                    <col id="mon" />
+                    <col id="tue" />
+                    <col id="wed" />
+                    <col id="thur" />
+                    <col id="fri" />
+                    <col id="sat" />
+                </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col"> Sun </th>
+                    <th scope="col"> Mon </th>
+                    <th scope="col"> Tue </th>
+                    <th scope="col"> Wed </th>
+                    <th scope="col"> Tur </th>
+                    <th scope="col"> Fri </th>
+                    <th scope="col"> Sat </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="null">26</td>
+                    <td class="null">27</td>
+                    <td class="null">28</td>
+                    <td><a href="#">1</a></td>
+                    <td><a href="#">2</a></td>
+                    <td><a href="#">3</a></td>
+                    <td><a href="#">4</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">5</a></td>
+                    <td><a href="#">6</a></td>
+                    <td><a href="#">7</a></td>
+                    <td><a href="#">8</a></td>
+                    <td><a href="#">9</a></td>
+                    <td><a href="#">10</a></td>
+                    <td><a href="#">11</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">12</a></td>
+                    <td><a href="#">13</a></td>
+                    <td><a href="#">14</a></td>
+                    <td><a href="#">15</a></td>
+                    <td><a href="#">16</a></td>
+                    <td><a href="#">17</a></td>
+                    <td><a href="#">18</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">19</a></td>
+                    <td><a href="#">20</a></td>
+                    <td><a href="#">21</a></td>
+                    <td><a href="#">22</a></td>
+                    <td><a href="#">23</a></td>
+                    <td><a href="#">24</a></td>
+                    <td><a href="#">25</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">26</a></td>
+                    <td><a href="#">27</a></td>
+                    <td><a href="#">28</a></td>
+                    <td><a href="#">29</a></td>
+                    <td><a href="#">30</a></td>
+                    <td><a href="#">31</a></td>
+                    <td class="null">1</td>
+                </tr>
+            </tbody>
+            </table>
+            </div>
+        </div>
+    </body>
+    <script>
+        // JS原生Date类输出日历
+        //获取某月天数
+        function getmonthday(year,month){
+            return new Date(year, month + 1, 0).getDate()
+        }
+        //给定日期获取星期
+        function getweek(year,month,day){
+            return new Date(year, month, day).getDay()
+        }
+        //获取某月第一天的星期
+        function getfirstday(year,month){
+            return new Date(year, month-1 , 1).getDay()
+        }
+        //获取某月该月的所有星期
+        function getallweek(year,month){
+            let time = {}
+            let monthday = getmonthday(year,month)
+            for(let date=1;date <= monthday; date++){
+                let allweek = '星期' + weeks[getweek(year,month,date)]
+                time[date] = allweek
+            }
+            return time
+        }
+        //输出日历格式
+        function printdate(prefixdate,datelength){
+            var result = getprefixdate(prefixdate)
+            for (let i = 1; i<=datelength; i++){
+                if (result.length == 7) {
+                    console.log(result.join('\t'))
+                    result = [i]
+                } else {
+                    result.push(i)
+                }
+            }
+            console.log(result.join('\t'))
+        }
+        //获取空出天数
+        function getprefixdate(prefixdate){
+            var result = [];
+            for (let i = 0;i < prefixdate; i++) {
+                result.push(' ')
+            }
+            return result
+        }
+        //输出日历表头
+        function printyear(year,month) {
+            let y = '\t\t' + year + '年' + month + '月'
+            console.log(y)
+            return
+        }
+        function printweek(n){
+            let wk = n.join('\t')
+            console.log(wk)
+            return
+        }
+        //基本常量
+        let weeks = ['日','一','二','三','四','五','六']
+        let year = new Date().getFullYear()
+        let month = new Date().getMonth()
+        //日历函数
+        function calendar(year,month){
+            let monthdetail = getallweek(year,month)
+            let monthlength = Object.keys(monthdetail).length
+            let prefix = getfirstday(year, month)
+            printyear(year,month+1)
+            printweek(weeks)
+            printdate(prefix,monthlength)
+        }
+        calendar(year,month)
+    </script>
+</html>

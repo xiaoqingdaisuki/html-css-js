@@ -1,4 +1,7 @@
-//  canvas初始化
+//  canvas初始化 
+//  <canvas id="canvas"></canvas>
+//  var canvas = document.getElementById('canvas')
+//  var context = canvas.getContext('2d')
 var canvas = document.getElementById('demo1')
 canvas.width = 1024
 canvas.height = 768
@@ -106,9 +109,6 @@ window.onload = function(){
         }, 50
     )
 
-//  demo4绘制
-
-
 //  demo2数组处理图像绘制
 let radius = 8
 let margin_top = 100
@@ -116,16 +116,22 @@ let margin_left = 30
 let window_width = 1024
 let window_height = 768
 
-const endTime = new Date(2018,2,12,00,00,00)
+const endTime = new Date(2018,3,1,00,00,00)
 let curShowTimeSeconds = 0
+let timeBall = []
+const timeBallColor = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]
 
+//  距离显示时间还有多少秒
 function getCurShowTimeSeconds(){
     let curTime = new Date()
-    let ret = endTime.getTime() - curTime.getTime()
-    ret = Math.round( ret/1000 )
+    //  倒计时效果 let ret = endTime.getTime() - curTime.getTime() 
+    //            ret = Math.round( ret/1000 )
+    //  时钟效果 let ret = curTime.getHours()*3600 + curTime.getMinutes()*60 + curTime.getSeconds()
+    let ret = curTime.getHours()*3600 + curTime.getMinutes()*60 + curTime.getSeconds()
     return ret >= 0 ? ret : 0
 } 
 
+//  动画更新函数
 function ditgitupdate(){
     let nextShowTimeSeconds = getCurShowTimeSeconds()
 
@@ -137,8 +143,71 @@ function ditgitupdate(){
     let curMinutes = parseInt( (curShowTimeSeconds - curHours * 3600) / 60)
     let curSeconds = curShowTimeSeconds % 60
 
+    //  判断时间不同时生成不同颜色的小球
     if ( nextSeconds != curSeconds){
+        if ( parseInt(curHours/10) != parseInt(nextHours/10)){
+            addTimeBall ( margin_left + 0, margin_top, parseInt(curHours/10))
+        }
+        if ( parseInt(curHours%10) != parseInt(nextHours%10)){
+            addTimeBall ( margin_left + 15*(radius+1), margin_top, parseInt(curHours/10))
+        }
+        if ( parseInt(curMinutes/10) != parseInt(nextMinutes/10)){
+            addTimeBall ( margin_left + 39*(radius+1), margin_top, parseInt(curMinutes/10))
+        }
+        if ( parseInt(curMinutes%10) != parseInt(nextMinutes%10)){
+            addTimeBall ( margin_left + 54*(radius+1), margin_top, parseInt(curMinutes%10))
+        }
+        if ( parseInt(curSeconds/10) != parseInt(nextSeconds/10)){
+            addTimeBall ( margin_left + 78*(radius+1), margin_top, parseInt(curSeconds/10))
+        }
+        if ( parseInt(curSeconds%10) != parseInt(nextSeconds%10)){
+            addTimeBall ( margin_left + 93*(radius+1), margin_top, parseInt(curSeconds%10))
+        }
         curShowTimeSeconds = nextShowTimeSeconds
+    }
+    //  更新小球的动画
+    updateBall();
+    console.log(timeBall.length)
+}
+
+//  添加小球初始属性
+function addTimeBall( x, y, num){
+    for (var i = 0; i < digit[num].length ; i++)
+        for (var j = 0; j < digit[num][i].length; j++)
+            if ( digit[num][i][j] == 1){
+                var aBall = {
+                    x: x+j*2*(radius+1)+(radius+1),
+                    y: y+i*2*(radius+1)+(radius+1),
+                    g: 1+Math.random(),
+                    vx: Math.pow( -1, Math.ceil(Math.random()*1000))*5,
+                    vy: -5,
+                    color: timeBallColor[Math.floor(Math.random()*timeBallColor.length)],
+                }
+                timeBall.push(aBall)
+            }
+}
+
+//  小球运动以及碰撞检测
+function updateBall(){
+    for (var i = 0; i < timeBall.length; i++){
+        timeBall[i].x += timeBall[i].vx
+        timeBall[i].y += timeBall[i].vy
+        timeBall[i].vy += timeBall[i].g
+
+        if (timeBall[i].y >= window_height-radius) {
+            timeBall[i].y = window_height - radius;
+            timeBall[i].vy = - timeBall[i].vy*0.8;
+        }
+    }
+    //  防止大量计算进行小球数组检测 前cnt的小球保留在画面中
+    var cnt = 0
+    for (var i = 0; i < timeBall.length; i++){
+        if (timeBall[i].x + radius > 0 && timeBall[i].x - radius < window_width){
+            timeBall[cnt++] = timeBall[i]
+        }
+    }
+    while (timeBall.length > Math.min(300,cnt)){
+        timeBall.pop()
     }
 }
 
@@ -161,6 +230,14 @@ function ditgitrender(cxt){
     // 绘制秒钟
     renderDigit(margin_left + 78*(radius+1), margin_top , parseInt(seconds/10), cxt)
     renderDigit(margin_left + 93*(radius+1), margin_top , parseInt(seconds%10), cxt)
+    // 绘制小球
+    for (var i = 0; i < timeBall.length; i++){
+        cxt.fillStyle = timeBall[i].color;
+        cxt.beginPath()
+        cxt.arc( timeBall[i].x, timeBall[i].y, radius, 0 ,2*Math.PI, true)
+        cxt.closePath()
+        cxt.fill()
+    }
 }
 
 function renderDigit(x, y, num, cxt){

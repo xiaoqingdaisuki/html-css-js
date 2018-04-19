@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset='utf-8'>
+    </head>
+<body>
+    <div id="demo1"></div>
+
+<script src="react.js"></script>
+<script src="react-dom.js"></script>
+<script>
+        var TextBoxComponent = React.createClass({
+            getState: function() {
+              return {enable: false};
+            },
+            handleClick: function(event) {
+              this.setState({enable: !this.state.enable});
+            },
+            render: function() {
+              return (React.createElement("p", null, React.createElement("input", {
+                type: "text",
+                disabled: this.state.enable
+              }), React.createElement("button", {onClick: this.handleClick}, " 改变状态 ")));
+            }
+          });
+        ReactDOM.render(
+            <TextBoxComponent />,
+            document.getElementById('demo1')
+        )
+</script>
+</body>
+</html>

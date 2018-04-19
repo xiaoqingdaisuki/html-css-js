@@ -2,24 +2,24 @@
 
 # es6 基础
 
-Javascript的类型有:**数字 字符串 布尔值 函数 对象 undefined null 数组 日期 正则表达式**
-声明变量有六种方法:**var function let const import class**
+Javascript的类型有:**数字 字符串 布尔值 函数 对象 undefined null 数组 日期 正则表达式**  
+声明变量有六种方法:**var function let const import class**  
 
-**算术操作符**:  +  -  *  /  %  ++  --
-**赋值操作符**:  =  +=  -=  *=  /=  %=
-**比较操作符**:  ==  ===  !=  >  >=  <  <=
-**逻辑操作符**:  &&  ||  !
-**位操作符**:  &  |  ~  ^  <<  >>
+**算术操作符**:  +  -  *  /  %  ++  --  
+**赋值操作符**:  =  +=  -=  *=  /=  %=  
+**比较操作符**:  ==  ===  !=  >  >=  <  <=  
+**逻辑操作符**:  &&  ||  !  
+**位操作符**:  &  |  ~  ^  <<  >>  
 
-数值类型                       转换成布尔值
----
-undefined                      false
-null                           false
-布尔值                         true是true,false是false
-数字                           +0,-0和NaN都是false,其他都是true
-字符串                         如果字符串是空的(长度是0)就是false,其他都是true
-对象                           true
----
+数值类型                       转换成布尔值  
+---  
+undefined                      false  
+null                           false  
+布尔值                         true是true,false是false  
+数字                           +0,-0和NaN都是false,其他都是true  
+字符串                         如果字符串是空的(长度是0)就是false,其他都是true  
+对象                           true  
+---  
 
 **模板字面量**
 ```

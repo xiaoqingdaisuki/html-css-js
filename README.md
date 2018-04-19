@@ -1,11 +1,11 @@
-# html-css-js
+# html-css-js  
 
-# es6 基础
+# es6 基础  
 
-Javascript的类型有:**数字 字符串 布尔值 函数 对象 undefined null 数组 日期 正则表达式**
-声明变量有六种方法:**var function let const import class**
+Javascript的类型有:**数字 字符串 布尔值 函数 对象 undefined null 数组 日期 正则表达式**  
+声明变量有六种方法:**var function let const import class**  
 
-**模板字面量**
+**模板字面量**  
 ```
 var book = {
     name: '这是一本书'
@@ -19,7 +19,7 @@ console.log(`你正在阅读${book.name}.
 这也是`);
 ```
 
-**箭头函数**
+**箭头函数**  
 ```
 var circle = function circle(r){
     var PI = 3.14;
@@ -36,7 +36,7 @@ let circle = (r) => {
 }
 ```
 
-**函数默认参数**
+**函数默认参数**  
 ```
 function sum(x = 1, y = 2, z = 3){
     return x+y+z
@@ -44,7 +44,7 @@ function sum(x = 1, y = 2, z = 3){
 console.log(sum(3,3)) // 输出9
 ```
 
-**声明展开**
+**声明展开**  
 ```
 var params = [3,4,5];
 console.log(sum(...params));
@@ -69,7 +69,7 @@ function func(x, y){
 };
 ```
 
-**数组解构**
+**数组解构**  
 初始变量
 ```
 var [x, y] = ['a', 'b'];
@@ -85,7 +85,7 @@ var obj = { x, y };
 console.log(obj); // { x: "a", y: "b" }
 ```
 
-**面向对象**
+**面向对象**  
 ES5
 ```
 function Book(title, pages){
@@ -128,7 +128,7 @@ class ITBook extends Book{
 let jsBook = new ITBook('学习JS', '200', 'Javascript')
 console.log(jsBook.title)
 ```
-可以用extends关键字扩展一个类并继承. 在构造函数中我们也可以用super关键字引用父类的构造函数
+可以用extends关键字扩展一个类并继承. 在构造函数中我们也可以用super关键字引用父类的构造函数  
 尽管JavaScript声明类的方式新语法与C++ JAVA很类似,但js面向对象编程还是基于原型实现.
 
 **属性存储**
@@ -148,5 +148,5 @@ class Person{
 let lotrChar = new Person('Frodo');
 console.log(lotrChar.name);
 ```
-声明set和get函数,只需要在需要暴露和使用的函数名前面加上get或set,然后可以用普通属性一样,引用他们名字,可以执行get和set函数
+声明set和get函数,只需要在需要暴露和使用的函数名前面加上get或set,然后可以用普通属性一样,引用他们名字,可以执行get和set函数  
 注意: 这里_name并不是真正的私有属性,我们仍可以引用它
